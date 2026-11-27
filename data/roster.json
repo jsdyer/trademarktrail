@@ -1,0 +1,79 @@
+[
+  {
+    "number": "2090183",
+    "topic": "Online gaming",
+    "scope": "Providing casino games and video games over the internet.",
+    "compare_with": "2090184",
+    "journal": {
+      "url": "https://publications.gc.ca/collections/collection_2022/opic-cipo/RG42-2-69-3557-eng.pdf#page=957",
+      "published": "2022-12-28",
+      "label": "Trademarks Journal, volume 69, issue 3557, page 957"
+    }
+  },
+  {
+    "number": "2090184",
+    "topic": "Online gaming",
+    "scope": "Providing casino games and video games over the internet.",
+    "compare_with": "2090185",
+    "journal": {
+      "url": "https://publications.gc.ca/collections/collection_2022/opic-cipo/RG42-2-69-3557-eng.pdf#page=958",
+      "published": "2022-12-28",
+      "label": "Trademarks Journal, volume 69, issue 3557, page 958"
+    }
+  },
+  {
+    "number": "2090185",
+    "topic": "Online gaming",
+    "scope": "Providing casino games and video games over the internet.",
+    "compare_with": "2090183",
+    "journal": {
+      "url": "https://publications.gc.ca/collections/collection_2022/opic-cipo/RG42-2-69-3557-eng.pdf#page=959",
+      "published": "2022-12-28",
+      "label": "Trademarks Journal, volume 69, issue 3557, page 959"
+    }
+  },
+  {
+    "number": "2060180",
+    "topic": "Space and robotics",
+    "scope": "Spacecraft equipment, industrial robots and other listed goods and services.",
+    "compare_with": "0900099"
+  },
+  {
+    "number": "0900099",
+    "topic": "Space and robotics",
+    "scope": "A remote manipulator system used in the space shuttle program.",
+    "compare_with": "2060180"
+  },
+  {
+    "number": "1198574",
+    "topic": "Communications",
+    "scope": "Handheld wireless devices, software, email and data messaging services."
+  },
+  {
+    "number": "0170580",
+    "topic": "Fishing",
+    "scope": "Fishing nets, twine and cordage for commercial or industrial purposes."
+  },
+  {
+    "number": "0197491",
+    "topic": "Food and drink",
+    "scope": "Carbonated beverages."
+  },
+  {
+    "number": "0686841",
+    "topic": "Food and drink",
+    "scope": "A filing covering multiple goods and services, including clothing, novelty items and restaurant services."
+  },
+  {
+    "number": "0607708",
+    "topic": "Food and drink",
+    "scope": "Ice cream.",
+    "compare_with": "0871883"
+  },
+  {
+    "number": "0871883",
+    "topic": "Food and drink",
+    "scope": "Ice cream.",
+    "compare_with": "0607708"
+  }
+]

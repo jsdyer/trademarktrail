@@ -1,0 +1,42 @@
+name: Check the Canadian trademark register
+on:
+  schedule:
+    - cron: '41 10 * * 5'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: trademarktrail-source
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install -r scripts/collector-requirements.txt
+      - name: Check CIPO trademark records
+        run: python3 scripts/refresh.py
+      - run: python3 -m unittest discover -s tests -v
+      - run: python3 scripts/build.py
+      - name: Publish the checked register edition
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! git diff --quiet -- data/register.json; then
+            git add data/register.json
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Refresh CIPO trademark records'
+            git push origin HEAD:main
+            gh workflow run pages.yml --ref main
+          elif [ "$GITHUB_RUN_ATTEMPT" -gt 1 ]; then
+            gh workflow run pages.yml --ref main
+          fi

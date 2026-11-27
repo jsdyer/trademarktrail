@@ -1,16 +1,43 @@
 {
-  "id": "coolcode-tool-template",
-  "title": "CoolCode Tool Starter",
-  "description": "A browser-only example that trims lines and removes exact duplicates.",
-  "category": "security",
-  "tags": ["text", "lines", "duplicates"],
-  "icon": "scan-search",
-  "url": "/coolcode-tool-template/",
-  "source": "https://github.com/jsdyer/coolcode-tool-template",
+  "id": "trademarktrail",
+  "title": "Trademark Trail",
+  "description": "Search selected Canadian trademarks, compare two applications and follow filing, advertisement and registration dates to the official register.",
+  "category": "explorers",
+  "tags": [
+    "trademarks",
+    "CIPO",
+    "Canadian brands",
+    "registration",
+    "intellectual property",
+    "opposition"
+  ],
+  "icon": "files",
+  "url": "/trademarktrail/",
+  "source": "https://github.com/jsdyer/trademarktrail",
   "hosting": "project",
   "access": "browser",
   "data_info": {
-    "mode": "local",
-    "detail": "The browser reads the text you paste and compares its lines."
+    "mode": "snapshot",
+    "cadence": "Weekly",
+    "detail": "Selected CIPO register histories are checked weekly. Filing, action and registration dates are published with the observed status and official sources.",
+    "probes": [
+      {
+        "label": "Register checked",
+        "url": "https://coolcode.ca/trademarktrail/data/status.json",
+        "path": [
+          "checked_at"
+        ],
+        "count_at": {
+          "path": [
+            "record_count"
+          ],
+          "unit": "trademark records"
+        }
+      }
+    ]
+  },
+  "result_directory": {
+    "path": "records/",
+    "title": "Canadian trademark histories by application number"
   }
 }

@@ -1,7 +1,11 @@
-// Keep transformations separate from the DOM so they can be tested directly.
-export function cleanLines(text) {
-  if (typeof text !== 'string') throw new TypeError('Expected text');
-  const lines = text.split(/\r\n|\r|\n/).map(line => line.trim()).filter(Boolean);
-  const unique = [...new Set(lines)];
-  return { text: unique.join('\n'), count: unique.length, removed: lines.length - unique.length };
+export function fold(value) {
+  return (value || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+}
+export function matches(row, query, status, topic) {
+  return fold(row.search).includes(fold(query)) && (!status || row.status === status) && (!topic || row.topic === topic);
+}
+export function sourceURL(raw) {
+  const number = raw.trim().replaceAll(',', '');
+  if (!/^\d{1,7}$/.test(number) || Number(number) < 1) return null;
+  return 'https://ised-isde.canada.ca/cipo/trademark-search/' + Number(number) + '?lang=eng';
 }

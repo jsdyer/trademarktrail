@@ -1,0 +1,733 @@
+{
+  "checked_at": "2026-11-27",
+  "attribution": "Contains data licensed by Her Majesty the Queen in right of Canada, as represented by the Minister of Industry, the minister responsible for the administration of the Canadian Intellectual Property Office.",
+  "licence": "https://ised-isde.canada.ca/site/canadian-intellectual-property-office/en/terms-and-conditions-use-canadian-intellectual-property-data",
+  "records": [
+    {
+      "number": "2090183",
+      "name": "TrueNorth.bet",
+      "status": "REGISTERED",
+      "classes": [
+        41
+      ],
+      "actions": [
+        {
+          "date": "2021-03-09",
+          "label": "Filed"
+        },
+        {
+          "date": "2021-03-09",
+          "label": "Created"
+        },
+        {
+          "date": "2021-03-09",
+          "label": "Formalized"
+        },
+        {
+          "date": "2022-11-24",
+          "label": "Search Recorded"
+        },
+        {
+          "date": "2022-11-30",
+          "label": "Approved"
+        },
+        {
+          "date": "2022-11-30",
+          "label": "Approval Notice Sent"
+        },
+        {
+          "date": "2022-12-28",
+          "label": "Advertised"
+        },
+        {
+          "date": "2023-03-15",
+          "label": "Registration Pending"
+        },
+        {
+          "date": "2023-03-15",
+          "label": "Registered"
+        }
+      ],
+      "source": "https://ised-isde.canada.ca/cipo/trademark-search/2090183?lang=eng",
+      "filed": "2021-03-09",
+      "registered": "2023-03-15",
+      "registration_number": "TMA1171288"
+    },
+    {
+      "number": "2090184",
+      "name": "TrueNorth ESports",
+      "status": "REGISTERED",
+      "classes": [
+        41
+      ],
+      "actions": [
+        {
+          "date": "2021-03-09",
+          "label": "Filed"
+        },
+        {
+          "date": "2021-03-09",
+          "label": "Created"
+        },
+        {
+          "date": "2021-03-09",
+          "label": "Formalized"
+        },
+        {
+          "date": "2022-11-24",
+          "label": "Search Recorded"
+        },
+        {
+          "date": "2022-11-30",
+          "label": "Approved"
+        },
+        {
+          "date": "2022-11-30",
+          "label": "Approval Notice Sent"
+        },
+        {
+          "date": "2022-12-28",
+          "label": "Advertised"
+        },
+        {
+          "date": "2023-03-15",
+          "label": "Registration Pending"
+        },
+        {
+          "date": "2023-03-15",
+          "label": "Registered"
+        }
+      ],
+      "source": "https://ised-isde.canada.ca/cipo/trademark-search/2090184?lang=eng",
+      "filed": "2021-03-09",
+      "registered": "2023-03-15",
+      "registration_number": "TMA1171289"
+    },
+    {
+      "number": "2090185",
+      "name": "TrueNorth",
+      "status": "REGISTERED",
+      "classes": [
+        41
+      ],
+      "actions": [
+        {
+          "date": "2021-03-09",
+          "label": "Filed"
+        },
+        {
+          "date": "2021-03-09",
+          "label": "Created"
+        },
+        {
+          "date": "2021-03-09",
+          "label": "Formalized"
+        },
+        {
+          "date": "2022-11-24",
+          "label": "Search Recorded"
+        },
+        {
+          "date": "2022-11-30",
+          "label": "Approved"
+        },
+        {
+          "date": "2022-11-30",
+          "label": "Approval Notice Sent"
+        },
+        {
+          "date": "2022-12-28",
+          "label": "Advertised"
+        },
+        {
+          "date": "2023-03-15",
+          "label": "Registration Pending"
+        },
+        {
+          "date": "2023-03-15",
+          "label": "Registered"
+        }
+      ],
+      "source": "https://ised-isde.canada.ca/cipo/trademark-search/2090185?lang=eng",
+      "filed": "2021-03-09",
+      "registered": "2023-03-15",
+      "registration_number": "TMA1171290"
+    },
+    {
+      "number": "2060180",
+      "name": "CANADARM",
+      "status": "OPPOSED",
+      "classes": [
+        7,
+        8,
+        9,
+        10,
+        12,
+        28,
+        35,
+        36,
+        37,
+        39,
+        42,
+        44
+      ],
+      "actions": [
+        {
+          "date": "2020-10-27",
+          "label": "Filed"
+        },
+        {
+          "date": "2020-10-27",
+          "label": "Created"
+        },
+        {
+          "date": "2020-10-27",
+          "label": "Formalized"
+        },
+        {
+          "date": "2022-04-21",
+          "label": "Pre-Assessment Letter Sent"
+        },
+        {
+          "date": "2023-12-15",
+          "label": "Agent Name Changed"
+        },
+        {
+          "date": "2024-09-03",
+          "label": "Search Recorded"
+        },
+        {
+          "date": "2024-09-03",
+          "label": "Examiner's First Report"
+        },
+        {
+          "date": "2025-04-11",
+          "label": "Approved"
+        },
+        {
+          "date": "2025-04-11",
+          "label": "Approval Notice Sent"
+        },
+        {
+          "date": "2025-05-21",
+          "label": "Advertised"
+        },
+        {
+          "date": "2025-06-16",
+          "label": "Agent Changed"
+        },
+        {
+          "date": "2025-07-17",
+          "label": "Proposed Opposition"
+        },
+        {
+          "date": "2025-08-05",
+          "label": "Agent Changed"
+        },
+        {
+          "date": "2025-09-22",
+          "label": "Opposed"
+        },
+        {
+          "date": "2026-11-04",
+          "label": "Agent Changed"
+        },
+        {
+          "date": "2026-11-06",
+          "label": "Agent Changed"
+        }
+      ],
+      "source": "https://ised-isde.canada.ca/cipo/trademark-search/2060180?lang=eng",
+      "filed": "2020-10-27"
+    },
+    {
+      "number": "0900099",
+      "name": "CANADARM",
+      "status": "WITHDRAWN",
+      "classes": [],
+      "actions": [
+        {
+          "date": "1984-09-14",
+          "label": "Filed"
+        },
+        {
+          "date": "1984-12-05",
+          "label": "Advertised"
+        },
+        {
+          "date": "2020-04-22",
+          "label": "Withdrawn"
+        }
+      ],
+      "source": "https://ised-isde.canada.ca/cipo/trademark-search/900099?lang=eng",
+      "filed": "1984-09-14"
+    },
+    {
+      "number": "1198574",
+      "name": "BLACKBERRY",
+      "status": "REGISTERED",
+      "classes": [
+        9,
+        38,
+        41
+      ],
+      "actions": [
+        {
+          "date": "2003-11-28",
+          "label": "Filed"
+        },
+        {
+          "date": "2003-12-05",
+          "label": "Created"
+        },
+        {
+          "date": "2003-12-10",
+          "label": "Formalized"
+        },
+        {
+          "date": "2004-05-11",
+          "label": "Search Recorded"
+        },
+        {
+          "date": "2004-05-11",
+          "label": "Examiner's First Report"
+        },
+        {
+          "date": "2004-09-20",
+          "label": "Correspondence Created"
+        },
+        {
+          "date": "2004-11-17",
+          "label": "Approved"
+        },
+        {
+          "date": "2004-12-22",
+          "label": "Advertised"
+        },
+        {
+          "date": "2005-03-11",
+          "label": "Allowed"
+        },
+        {
+          "date": "2005-03-11",
+          "label": "Allowance Notice Sent"
+        },
+        {
+          "date": "2005-04-21",
+          "label": "Registered"
+        },
+        {
+          "date": "2009-05-08",
+          "label": "Rep for Service Changed"
+        },
+        {
+          "date": "2009-05-13",
+          "label": "Change of Title Registered"
+        },
+        {
+          "date": "2009-05-28",
+          "label": "Clerical Correction"
+        },
+        {
+          "date": "2011-08-18",
+          "label": "Note to file"
+        },
+        {
+          "date": "2013-10-08",
+          "label": "Rep for Service Changed"
+        },
+        {
+          "date": "2013-10-18",
+          "label": "Amendment to Registration"
+        },
+        {
+          "date": "2013-10-23",
+          "label": "Rep for Service Changed"
+        },
+        {
+          "date": "2013-11-07",
+          "label": "Rep for Service Changed"
+        },
+        {
+          "date": "2015-01-28",
+          "label": "Rep for Service Changed"
+        },
+        {
+          "date": "2020-04-21",
+          "label": "Renewed"
+        },
+        {
+          "date": "2020-07-28",
+          "label": "Requirement to Furnish Statement Under Subsection 44.1(1) Sent"
+        },
+        {
+          "date": "2020-10-07",
+          "label": "Correspondence Created"
+        },
+        {
+          "date": "2020-10-07",
+          "label": "Adjusted Renewal Fee Notice Sent"
+        },
+        {
+          "date": "2020-10-22",
+          "label": "Adjusted Renewal Fee Received"
+        }
+      ],
+      "source": "https://ised-isde.canada.ca/cipo/trademark-search/1198574?lang=eng",
+      "filed": "2003-11-28",
+      "registered": "2005-04-21",
+      "registration_number": "TMA638068"
+    },
+    {
+      "number": "0170580",
+      "name": "BLUENOSE",
+      "status": "EXPUNGED",
+      "classes": [],
+      "actions": [
+        {
+          "date": "1937-04-14",
+          "label": "Filed"
+        },
+        {
+          "date": "1937-04-14",
+          "label": "Registered"
+        },
+        {
+          "date": "1982-04-14",
+          "label": "Renewed"
+        },
+        {
+          "date": "1997-05-07",
+          "label": "Renewal Notice Sent"
+        },
+        {
+          "date": "1997-12-11",
+          "label": "Expunged - Failure to Renew"
+        },
+        {
+          "date": "1999-12-16",
+          "label": "Rep for Service Name Changed"
+        }
+      ],
+      "source": "https://ised-isde.canada.ca/cipo/trademark-search/170580?lang=eng",
+      "filed": "1937-04-14",
+      "registered": "1937-04-14",
+      "registration_number": "UCA8166"
+    },
+    {
+      "number": "0197491",
+      "name": "SUSSEX",
+      "status": "REGISTERED",
+      "classes": [
+        32
+      ],
+      "actions": [
+        {
+          "date": "1947-11-24",
+          "label": "Registered"
+        },
+        {
+          "date": "1947-11-24",
+          "label": "Filed"
+        },
+        {
+          "date": "1992-11-24",
+          "label": "Renewed"
+        },
+        {
+          "date": "2007-11-24",
+          "label": "Renewed"
+        },
+        {
+          "date": "2008-06-10",
+          "label": "Amendment to Registration"
+        },
+        {
+          "date": "2008-07-25",
+          "label": "Change of Title Registered"
+        },
+        {
+          "date": "2009-03-09",
+          "label": "Rep for Service Name Changed"
+        },
+        {
+          "date": "2009-11-25",
+          "label": "Rep for Service Name Changed"
+        },
+        {
+          "date": "2022-08-08",
+          "label": "Requirement to Furnish Statement Under Subsection 44.1(1) Sent"
+        },
+        {
+          "date": "2022-11-24",
+          "label": "Renewed"
+        },
+        {
+          "date": "2022-11-29",
+          "label": "Nice Class(es) Acceptance Letter Sent"
+        },
+        {
+          "date": "2026-04-21",
+          "label": "Agent Changed"
+        }
+      ],
+      "source": "https://ised-isde.canada.ca/cipo/trademark-search/197491?lang=eng",
+      "filed": "1947-11-24",
+      "registered": "1947-11-24",
+      "registration_number": "UCA28773"
+    },
+    {
+      "number": "0686841",
+      "name": "BEAVERTAILS",
+      "status": "REGISTERED",
+      "classes": [
+        14,
+        16,
+        18,
+        21,
+        25,
+        28,
+        29,
+        30,
+        32,
+        43
+      ],
+      "actions": [
+        {
+          "date": "1991-07-31",
+          "label": "Created"
+        },
+        {
+          "date": "1991-07-31",
+          "label": "Filed"
+        },
+        {
+          "date": "1991-10-18",
+          "label": "Search Recorded"
+        },
+        {
+          "date": "1991-11-29",
+          "label": "Correspondence Created"
+        },
+        {
+          "date": "1992-06-04",
+          "label": "Correspondence Created"
+        },
+        {
+          "date": "1992-10-27",
+          "label": "Approved"
+        },
+        {
+          "date": "1993-03-10",
+          "label": "Advertised"
+        },
+        {
+          "date": "1993-06-04",
+          "label": "Allowed"
+        },
+        {
+          "date": "1993-06-04",
+          "label": "Allowance Notice Sent"
+        },
+        {
+          "date": "1993-12-17",
+          "label": "Registered"
+        },
+        {
+          "date": "1996-11-21",
+          "label": "Change of Title Registered"
+        },
+        {
+          "date": "1997-04-09",
+          "label": "Clerical Correction"
+        },
+        {
+          "date": "1997-04-09",
+          "label": "Security Interest Placed"
+        },
+        {
+          "date": "2000-09-13",
+          "label": "Security Interest Amended"
+        },
+        {
+          "date": "2001-05-30",
+          "label": "Rep for Service Name Changed"
+        },
+        {
+          "date": "2008-12-17",
+          "label": "Renewed"
+        },
+        {
+          "date": "2009-01-07",
+          "label": "Renewal Notice Sent"
+        },
+        {
+          "date": "2009-12-02",
+          "label": "Rep for Service Changed"
+        },
+        {
+          "date": "2010-05-21",
+          "label": "Change of Title Registered"
+        },
+        {
+          "date": "2010-05-21",
+          "label": "Amendment to Registration"
+        },
+        {
+          "date": "2014-08-12",
+          "label": "Amendment to Registration"
+        },
+        {
+          "date": "2022-12-13",
+          "label": "Adjusted Renewal Fee Received"
+        },
+        {
+          "date": "2023-03-28",
+          "label": "Nice Correspondence Sent"
+        },
+        {
+          "date": "2023-06-05",
+          "label": "Nice Class(es) Acceptance Letter Sent"
+        },
+        {
+          "date": "2023-06-05",
+          "label": "Adjusted Renewal Fee Notice Sent"
+        },
+        {
+          "date": "2023-07-06",
+          "label": "Amendment to Registration"
+        },
+        {
+          "date": "2023-07-07",
+          "label": "Nice Correspondence Sent"
+        },
+        {
+          "date": "2023-08-10",
+          "label": "Nice Correspondence Sent"
+        },
+        {
+          "date": "2023-12-17",
+          "label": "Renewed"
+        },
+        {
+          "date": "2024-06-13",
+          "label": "Adjusted Renewal Fee Received"
+        }
+      ],
+      "source": "https://ised-isde.canada.ca/cipo/trademark-search/686841?lang=eng",
+      "filed": "1991-07-31",
+      "registered": "1993-12-17",
+      "registration_number": "TMA420972"
+    },
+    {
+      "number": "0607708",
+      "name": "COFFEE CRISP",
+      "status": "ABANDONED",
+      "classes": [],
+      "actions": [
+        {
+          "date": "1988-05-27",
+          "label": "Filed"
+        },
+        {
+          "date": "1988-08-12",
+          "label": "Search Recorded"
+        },
+        {
+          "date": "1988-11-23",
+          "label": "Advertised"
+        },
+        {
+          "date": "1989-01-27",
+          "label": "Allowed"
+        },
+        {
+          "date": "1992-08-07",
+          "label": "Abandoned"
+        }
+      ],
+      "source": "https://ised-isde.canada.ca/cipo/trademark-search/607708?lang=eng",
+      "filed": "1988-05-27"
+    },
+    {
+      "number": "0871883",
+      "name": "COFFEE CRISP",
+      "status": "REGISTERED",
+      "classes": [],
+      "actions": [
+        {
+          "date": "1998-03-11",
+          "label": "Filed"
+        },
+        {
+          "date": "1998-03-18",
+          "label": "Created"
+        },
+        {
+          "date": "1998-03-20",
+          "label": "Formalized"
+        },
+        {
+          "date": "1998-05-04",
+          "label": "Search Recorded"
+        },
+        {
+          "date": "1998-05-19",
+          "label": "Examiner's First Report"
+        },
+        {
+          "date": "1998-09-16",
+          "label": "Approved"
+        },
+        {
+          "date": "1998-10-21",
+          "label": "Advertised"
+        },
+        {
+          "date": "1999-01-14",
+          "label": "Allowed"
+        },
+        {
+          "date": "1999-01-14",
+          "label": "Allowance Notice Sent"
+        },
+        {
+          "date": "1999-04-01",
+          "label": "Registered"
+        },
+        {
+          "date": "2014-04-01",
+          "label": "Renewed"
+        },
+        {
+          "date": "2016-09-12",
+          "label": "Rep for Service Changed"
+        },
+        {
+          "date": "2017-01-27",
+          "label": "Rep for Service Changed"
+        },
+        {
+          "date": "2018-04-26",
+          "label": "Amendment to Registration"
+        },
+        {
+          "date": "2023-12-05",
+          "label": "Agent Changed"
+        },
+        {
+          "date": "2025-01-21",
+          "label": "Amendment to Registration"
+        },
+        {
+          "date": "2026-09-02",
+          "label": "Agent Changed"
+        }
+      ],
+      "source": "https://ised-isde.canada.ca/cipo/trademark-search/871883?lang=eng",
+      "filed": "1998-03-11",
+      "registered": "1999-04-01",
+      "registration_number": "TMA510375"
+    }
+  ]
+}

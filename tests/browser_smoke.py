@@ -1,74 +1,66 @@
-"""Exercise the built starter at a project subpath in Chromium."""
+"""Verify navigation, comparison, saved link state and the native records at phone widths."""
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+import os
+import json
 from pathlib import Path
-import shutil
-import tempfile
-import sys
-import threading
-from playwright.sync_api import sync_playwright
+from tempfile import TemporaryDirectory
+from threading import Thread
+from playwright.sync_api import sync_playwright, expect
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
-from build import build
+ROOT=Path(__file__).resolve().parents[1]
 
-
-class QuietHandler(SimpleHTTPRequestHandler):
-    def log_message(self, *args):
-        pass
-
-
-def main():
-    screenshots = ROOT / "browser-checks"
-    screenshots.mkdir(exist_ok=True)
-    with tempfile.TemporaryDirectory() as temporary:
-        shutil.copytree(ROOT / "dist", Path(temporary) / "example-tool")
-        example = Path(temporary) / "preset-fixture"
-        example.mkdir()
-        shutil.copytree(ROOT / "web", example / "web")
-        shutil.copytree(ROOT / "examples/common-pages", example / "common-pages")
-        for name in ("tool.json", "README.md"):
-            shutil.copyfile(ROOT / name, example / name)
-        build(example)
-        server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=temporary))
-        threading.Thread(target=server.serve_forever, daemon=True).start()
+def run():
+    records = {r['number']: r for r in json.loads((ROOT / 'data/register.json').read_text())['records']}
+    arm_records = [r for r in records.values() if 'CANADARM' in r['name']]
+    selected_status = records['2060180']['status']
+    with TemporaryDirectory() as tmp:
+        (Path(tmp)/'trademarktrail').symlink_to(ROOT/'dist',target_is_directory=True)
+        server=ThreadingHTTPServer(('127.0.0.1',0),partial(SimpleHTTPRequestHandler,directory=tmp))
+        thread=Thread(target=server.serve_forever,daemon=True);thread.start()
+        base=f'http://127.0.0.1:{server.server_port}/trademarktrail/'
         try:
             with sync_playwright() as p:
-                browser = p.chromium.launch()
-                page = browser.new_page(viewport={"width": 1280, "height": 1000})
-                errors = []
-                page.on("pageerror", lambda error: errors.append(str(error)))
-                page.goto(f"http://127.0.0.1:{server.server_port}/example-tool/")
-                assert page.locator("#input").input_value() == "Halifax\nLangley\nHalifax\nVancouver"
-                assert page.locator("#output").input_value() == "Halifax\nLangley\nVancouver"
-                assert "1 duplicate removed" in page.locator("#status").inner_text()
-                page.locator("#input").fill('<img src=x onerror="alert(1)">\n<img src=x onerror="alert(1)">')
-                assert page.locator("#output").input_value() == '<img src=x onerror="alert(1)">'
-                assert page.locator("img").count() == 0
-                page.locator("#clear").click()
-                assert page.locator("#output").input_value() == ""
-                assert "Paste one item per line" in page.locator("#status").inner_text()
-                page.locator("#sample").click()
-                assert page.locator("#output").input_value() == "Halifax\nLangley\nVancouver"
-                page.screenshot(path=str(screenshots / "desktop.png"), full_page=True)
-                page.set_viewport_size({"width": 390, "height": 844})
-                page.goto(f"http://127.0.0.1:{server.server_port}/example-tool/")
-                assert page.locator("#input").bounding_box()["y"] < 844
-                assert page.locator("#output").input_value() == "Halifax\nLangley\nVancouver"
-                assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
-                page.screenshot(path=str(screenshots / "mobile.png"), full_page=True)
-                page.goto(f"http://127.0.0.1:{server.server_port}/preset-fixture/dist/remove-duplicate-cities/")
-                assert page.locator("#output").input_value() == "Vancouver\nHalifax\nCharlottetown"
-                page.locator("#input").fill("Surrey\nSurrey\nOttawa")
-                assert page.locator("#output").input_value() == "Surrey\nOttawa"
-                page.get_by_role("button", name="Restore example").click()
-                assert page.locator("#output").input_value() == "Vancouver\nHalifax\nCharlottetown"
-                assert not errors, errors
+                browser=p.chromium.launch(executable_path=os.getenv('CHROMIUM_PATH'),args=['--no-sandbox'])
+                page=browser.new_page(viewport={'width':1280,'height':900})
+                page.goto(base)
+                expect(page.get_by_role('heading',name='Follow a Canadian trademark')).to_be_visible()
+                page.get_by_label('Find a mark or number').fill('CANADARM')
+                expect(page.locator('[data-mark]:visible')).to_have_count(len(arm_records))
+                page.get_by_label('CIPO status').select_option(selected_status)
+                expect(page.locator('[data-mark]:visible')).to_have_count(sum(r['status'] == selected_status for r in arm_records))
+                page.reload()
+                expect(page.locator('[data-mark]:visible')).to_have_count(sum(r['status'] == selected_status for r in arm_records))
+                page.get_by_label('First mark').select_option('0607708')
+                page.get_by_label('Second mark').select_option('0871883')
+                expect(page.locator('[data-field="status"]').nth(0)).to_have_text(records['0607708']['status'])
+                expect(page.locator('[data-field="status"]').nth(1)).to_have_text(records['0871883']['status'])
+                page.reload()
+                expect(page.get_by_label('First mark')).to_have_value('0607708')
+                page.goto(base)
+                shots=ROOT/'browser-checks';shots.mkdir(exist_ok=True)
+                page.screenshot(path=str(shots/'desktop.png'))
+                page.set_viewport_size({'width':390,'height':844})
+                for width in [390,320]:
+                    page.set_viewport_size({'width':width,'height':844})
+                    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                    assert page.get_by_role('link',name='Find a trademark').bounding_box()['y']<650
+                page.screenshot(path=str(shots/'mobile.png'))
+                page.get_by_role('link',name='Read the timeline').click()
+                expect(page.locator('h1')).to_have_text('TrueNorth.bet')
+                expect(page.get_by_text('Registration TMA1171288.')).to_be_visible()
+                page.locator('details summary').click()
+                context=browser.new_context(java_script_enabled=False,viewport={'width':320,'height':720})
+                native=context.new_page()
+                native.goto(base+'records/')
+                native.get_by_role('link',name='BLUENOSE',exact=True).click()
+                expect(native.locator('h1')).to_have_text('BLUENOSE')
+                expect(native.locator('.state')).to_have_text(records['0170580']['status'])
+                assert native.evaluate('document.documentElement.scrollWidth <= innerWidth')
                 browser.close()
-            print("Browser checks passed: project subpath, sample, clear, safe text and mobile layout")
         finally:
             server.shutdown()
-
-
-if __name__ == "__main__":
-    main()
+            thread.join()
+            server.server_close()
+if __name__=='__main__':
+    run()

@@ -1,113 +1,55 @@
-import json
 from pathlib import Path
-import re
+from tempfile import TemporaryDirectory
+import json
 import shutil
 import sys
-import tempfile
 import unittest
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from build import ROOT, build, metadata
+from xml.etree import ElementTree
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
+from build import ROOT, build
+from refresh import ATTRIBUTION, parse_record, refresh
 
+SAMPLE = b"""<h1 id="wb-cont">FRESH MARK &mdash; 9990001</h1><div id="details-bio-info">
+<div><div><h3>Application number</h3></div><div>9990001</div></div>
+<div><div><h3>CIPO Status</h3></div><div>OPPOSED</div></div>
+<div><div><h3>Agent</h3></div><div>Private Street</div></div></div>
+<div id="details-act-hist"><table><tbody><tr><td>Filed</td><td>2022-01-01</td><td>2030-01-01</td><td>Private Street</td></tr></tbody></table></div>"""
 
-class BuildTests(unittest.TestCase):
-    def setUp(self):
-        self.temporary = tempfile.TemporaryDirectory()
-        self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name)
-        shutil.copytree(ROOT / "web", self.root / "web")
-        shutil.copyfile(ROOT / "tool.json", self.root / "tool.json")
-        shutil.copyfile(ROOT / "README.md", self.root / "README.md")
+class TestRecords(unittest.TestCase):
+    def test_parse_exact_identity_and_action_column(self):
+        r=parse_record(SAMPLE,'9990001')
+        self.assertEqual(r['actions'],[dict(date='2022-01-01',label='Filed')])
+        self.assertEqual(r['filed'], '2022-01-01')
+        self.assertNotIn('Private Street',json.dumps(r))
+        with self.assertRaises(ValueError):
+            parse_record(SAMPLE,'9990002')
 
-    def edit(self, **changes):
-        tool = json.loads((self.root / "tool.json").read_text())
-        tool.update(changes)
-        (self.root / "tool.json").write_text(json.dumps(tool))
+    def test_validation_retains_previous_complete_edition(self):
+        with TemporaryDirectory() as folder:
+            p=Path(folder)/'register.json'
+            p.write_text('unchanged')
+            with self.assertRaises(ValueError):
+                refresh([dict(number='9990001'),dict(number='9990002')],p,lambda _: SAMPLE)
+            self.assertEqual(p.read_text(),'unchanged')
 
-    def test_build_is_scoped_to_web_and_escapes_metadata(self):
-        (self.root / "private.txt").write_text("must not publish")
-        self.edit(title='<img src=x onerror="bad()">')
-        build(self.root)
-        page = (self.root / "dist/index.html").read_text()
-        self.assertIn('&lt;img', page)
-        self.assertNotIn('<img', page)
-        self.assertNotIn('{{', page)
-        self.assertIn('href="./style.css"', page)
-        self.assertFalse((self.root / "dist/private.txt").exists())
-        self.assertTrue((self.root / "dist/.nojekyll").exists())
-
-    def test_reporting_is_scoped_to_initialized_coolcode_tools(self):
-        for owner, slug, enabled in [
-            ("jsdyer", "coolcode-tool-template", False),
-            ("another-owner", "my-tool", False),
-            ("jsdyer", "my-tool", True),
-        ]:
-            with self.subTest(owner=owner, slug=slug):
-                self.edit(id=slug, url=f"/{slug}/", source=f"https://github.com/{owner}/{slug}")
-                build(self.root)
-                page = (self.root / "dist/index.html").read_text()
-                self.assertEqual('/assets/tool-metrics.js' in page, enabled)
-                self.assertEqual(f'https://coolcode.ca/report/?tool={slug}' in page, enabled)
-                self.assertNotIn("{{", page)
-
-    def test_common_pages_are_opt_in_and_preserve_root_search_title_and_stats(self):
-        self.edit(id="example", url="/example/", source="https://github.com/jsdyer/example")
-        build(self.root)
-        route = self.root / "dist/remove-duplicate-cities/index.html"
-        self.assertFalse(route.exists())
-        entry = self.root / "web/index.html"
-        entry.write_text(re.sub(r"<title>.*?</title>", "<title>Custom search title · CoolCode</title>",
-                                entry.read_text(), count=1, flags=re.S))
-        shutil.copytree(ROOT / "examples/common-pages", self.root / "common-pages")
-        build(self.root)
-        root = (self.root / "dist/index.html").read_text()
-        self.assertIn("<title>Custom search title · CoolCode</title>", root)
-        self.assertIn('href="./remove-duplicate-cities/"', root)
-        self.assertIn('rel="canonical" href="https://coolcode.ca/example/"', root)
-        page = route.read_text()
-        self.assertIn("<title>Remove duplicate cities from a list · CoolCode</title>", page)
-        self.assertIn('rel="canonical" href="https://coolcode.ca/example/remove-duplicate-cities/"', page)
-        self.assertIn('src="../app.mjs"', page)
-        self.assertIn('data-tool-id="example"', page)
-        self.assertIn('src="/assets/tool-metrics.js"', page)
-        self.assertIn("Vancouver\nHalifax\nCharlottetown</textarea>", page)
-
-    def test_rejects_invalid_common_page_paths_and_collisions(self):
-        directory = self.root / "common-pages"
-        directory.mkdir()
-        manifest = directory / "manifest.json"
-        for slug in ("../escape", "/absolute", "a/b", "x?name=1", ""):
-            with self.subTest(slug=slug):
-                manifest.write_text(json.dumps([{"slug": slug, "title": "T", "description": "D"}]))
-                with self.assertRaises(ValueError):
-                    build(self.root)
-        manifest.write_text('[{"slug":"data","title":"Data","description":"Some data"}]')
-        (self.root / "web/data").mkdir()
-        with self.assertRaisesRegex(ValueError, "collides"):
-            build(self.root)
-
-    def test_url_matches_tool_id(self):
-        self.edit(url="/different/")
-        with self.assertRaises(ValueError): metadata(self.root)
-
-    def test_requires_a_source_sentence_and_a_guide_note(self):
-        (self.root / "README.md").write_text("# A tool")
-        with self.assertRaisesRegex(ValueError, "README note"):
-            metadata(self.root)
-        self.edit(data_info={"mode": "local", "detail": ""})
-        with self.assertRaisesRegex(ValueError, "homepage card"):
-            metadata(self.root)
-
-    def test_browser_access_is_explicit(self):
-        self.edit(access="install")
-        with self.assertRaisesRegex(ValueError, "immediately usable"):
-            metadata(self.root)
-
-    def test_failed_build_keeps_existing_output(self):
-        build(self.root)
-        existing = (self.root / "dist/index.html").read_bytes()
-        self.edit(source="javascript:bad()")
-        with self.assertRaises(ValueError): build(self.root)
-        self.assertEqual((self.root / "dist/index.html").read_bytes(), existing)
-
-
-if __name__ == "__main__": unittest.main()
+    def test_new_number_builds_its_own_canonical_page_and_sitemap_entry(self):
+        with TemporaryDirectory() as folder:
+            root=Path(folder)
+            for name in ('data','web'):
+                shutil.copytree(ROOT/name,root/name)
+            shutil.copy(ROOT/'tool.json',root)
+            roster=root/'data/roster.json'
+            rows=json.loads(roster.read_text())+[dict(number='9990001',topic='Test',scope='New test mark.')]
+            roster.write_text(json.dumps(rows))
+            reg=root/'data/register.json'
+            edition=json.loads(reg.read_text());edition['records'].append(parse_record(SAMPLE,'9990001'));reg.write_text(json.dumps(edition))
+            build(root)
+            xml=ElementTree.parse(root/'dist/sitemap.xml')
+            urls=[e.text for e in xml.findall('.//{*}loc')]
+            self.assertEqual(len(urls),len(rows)+1)
+            url='https://coolcode.ca/trademarktrail/records/9990001/'
+            self.assertIn(url,urls)
+            text=(root/'dist/records/9990001/index.html').read_text()
+            self.assertIn('rel="canonical" href="'+url+'"',text)
+            self.assertIn(ATTRIBUTION,text)
+            self.assertIn('New test mark.',text)

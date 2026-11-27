@@ -24,6 +24,8 @@ jobs:
           node-version: '24'
       - name: Test the application
         run: node --test tests/*.test.mjs
+      - name: Install register parser for source tests
+        run: python3 -m pip install -r scripts/collector-requirements.txt
       - name: Test the builder
         run: python3 -m unittest discover -s tests -v
       - name: Build the static application
